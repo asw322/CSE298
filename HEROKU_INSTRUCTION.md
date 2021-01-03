@@ -2,8 +2,13 @@
 
 Prerequisite: 
 1. Have psql (try psql --version)
-You can download from brew using brew install postgres
-Then run brew services start postgres to start psql 
+    Mac setup:
+    - You can download from brew using brew install postgres
+    - Then run brew services start postgres to start psql 
+    Windows Setup:
+    - Download using `yarn add postgres`
+    - In terminal, run `yarn start postgres`
+    - Go to localhost:8000
 2. Need the database credentials from Heroku 
 Host        ec2-52-2-127-5.compute-1.amazonaws.com
 Database    d2kvcrg92njeso
