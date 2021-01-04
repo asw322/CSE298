@@ -4,9 +4,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import vSelectMenu from 'v-selectmenu';
-Vue.use(vSelectMenu, { global config options... });
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Tags extends Vue {
@@ -15,8 +13,7 @@ export default class Tags extends Vue {
           value: '',
           list: [
             {id:1 ,name:'Chicago Bulls',desc:'芝加哥公牛'},
-            {id:2 ,name:'Cleveland Cavaliers',desc:'克里夫兰骑士'},
-            {...}
+            {id:2 ,name:'Cleveland Cavaliers',desc:'克里夫兰骑士'}
           ]
       };
   };  

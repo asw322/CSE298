@@ -6,16 +6,19 @@
     <h3>Messages Page</h3>
     <p>{{ welcome }}</p>
     <posts></posts>
+    <tags><tags>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Posts from '../components/Posts.vue'
+import Tags from '../components/Tags.vue'
 
 @Component({
   components: {
-    Posts
+    Posts,
+    Tags
   }
 })
 export default class MessagesPage extends Vue {
