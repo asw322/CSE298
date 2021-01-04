@@ -1,29 +1,11 @@
 <template>
 <!-- https://jsfiddle.net/coligo/txpy7ug4/ -->
-  <div id="app">
-    <div class="container-fluid">
-      <!-- <ul class="list-group">
-        <post v-for="comment in comments" :post="comment"></post>
-      </ul> -->
-
-      <div id="comment-box">
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter a comment..."
-            v-model="comment"
-            @keyup.enter="postComment"
-          />
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="button" @click="postComment">
-              Submit
-            </button>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
+    <ol class="list-group-item">
+        <em class="glyphicon glyphicon-chevron-up" @click="upvote" :class="{disabled: upvoted}"></em>
+        <span class="label label-primary">{{ votes }}</span>
+        <em class="glyphicon glyphicon-chevron-down" @click="downvote" :class="{disabled: downvoted}"></>
+        <a>{{ post.title }}</a>
+    </ol>
 </template>
 
 <script lang = "ts">
