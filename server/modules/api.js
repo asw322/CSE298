@@ -1,10 +1,10 @@
 var express = require('express');
 const router = express.Router();
-var db = require('../datastore/datastore.js');
+//node-pg impl
+const db = require('../datastore/datastore.js');
 var moment = require('moment');
 
 //node-pg connect through datastore.js pool 
-const db = require('../datastore')
 //DB QUERY TEMPLATE, FOLLOW THIS ALAN 😁
 // db.query('SELECT *', [req.params.id], (err, res) => {
 //   if (err) {

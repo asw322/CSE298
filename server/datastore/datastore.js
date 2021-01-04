@@ -1,14 +1,13 @@
 //node-pg interface connection
 
 const { Pool } = require('pg')
-const pool = new Pool()
 
 require('dotenv').config()
 
 console.log('[postgres] ' + process.env.NODE_ENV + 'postgres config loaded')
 
 var config = {}
-if (process.env.NODE_ENV !== 'test') {  //dont use test env
+if (process.env.NODE_ENV == 'development') {  //regular env
   config = {
     host: process.env.PSQL_HOSTNAME,
     user: process.env.PSQL_USER,
@@ -17,7 +16,7 @@ if (process.env.NODE_ENV !== 'test') {  //dont use test env
     database: process.env.PSQL_DBNAME,
   }
 }
-else {  //use test environment (No test database currently)
+else if (process.env.NODE_ENV == 'test') {  //use test environment (No test database currently)
   console.log('testing server currently unimplimented, using main db')
   config = {
     host: process.env.PSQL_HOSTNAME,
