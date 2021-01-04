@@ -1,0 +1,1 @@
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U1', 'funny', 'This is some sample text, haha', 0, 0);
