@@ -15,5 +15,8 @@
     "concurrently": "5.3.0"
   },
   "private": true,
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "v-selectmenu": "^2.0.2"
+  }
 }

@@ -23,6 +23,8 @@ export default class Tags extends Vue {
 };
 </script>
 
+
+
 <style scoped>
 textarea.form-control {
   height: 100px;
