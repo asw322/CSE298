@@ -5,7 +5,13 @@ var moment = require('moment');
 
 //node-pg connect through datastore.js pool 
 const db = require('../datastore')
-
+//DB QUERY TEMPLATE, FOLLOW THIS ALAN 😁
+// db.query('SELECT *', [req.params.id], (err, res) => {
+//   if (err) {
+//     return next(err)
+//   }
+//   res.send(res.rows[0])
+// })
 
 router.get('/posts',  (req, res) => {
   var data = db.get('posts').value();
