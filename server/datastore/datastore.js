@@ -30,10 +30,15 @@ const client = new Client({
 
 client.connect();
 
-
+// NOTE: THIS QUERY WORKS 
+// client.query('SELECT * FROM users', (err, res) => {
+//   if (err) throw err
+//   console.log(res)
+//   client.end()
+// })
 
 client.query('SELECT * FROM employees', (err, res) => {
-  if (err) throw err;
+  if (err) throw err
   for (let row of res.rows) {
     console.log(JSON.stringify(row));
   }
