@@ -1,4 +1,4 @@
-// This file contains all of the end-to-end tests for Sprint 1.
+// This file contains the end-to-end tests for Sprint 1.
 
 describe('Sprint 1', () => {
     beforeEach(() => {
