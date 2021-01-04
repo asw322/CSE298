@@ -17,6 +17,6 @@
   "private": true,
   "license": "UNLICENSED",
   "dependencies": {
-    "v-selectmenu": "^2.0.2"
+  "postgres": "^1.0.2"
   }
 }
