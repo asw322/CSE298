@@ -3,7 +3,7 @@
     <ol class="list-group-item">
         <em class="glyphicon glyphicon-chevron-up" @click="upvote" :class="{disabled: upvoted}"></em>
         <span class="label label-primary">{{ votes }}</span>
-        <em class="glyphicon glyphicon-chevron-down" @click="downvote" :class="{disabled: downvoted}"></>
+        <em class="glyphicon glyphicon-chevron-down" @click="downvote" :class="{disabled: downvoted}"></em>
         <a>{{ post.title }}</a>
     </ol>
 </template>
