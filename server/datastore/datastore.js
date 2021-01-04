@@ -1,14 +1,41 @@
-const low = require('lowdb');
-const path = require('path');
-const FileSync = require('lowdb/adapters/FileSync');
+//node-pg interface connection
 
-let adapter = null;
-if (process.env.NODE_ENV !== 'test') {
-  adapter = new FileSync(path.join(__dirname, './db.json'));
-}
-else {
-  adapter = new FileSync(path.join(__dirname, './testdb.json'));
-}
-const db = low(adapter);
+const { Pool } = require('pg')
+const pool = new Pool()
 
-module.exports = db;
+require('dotenv').config()
+
+console.log('[postgres] ' + process.env.NODE_ENV + 'postgres config loaded')
+
+var config = {}
+if (process.env.NODE_ENV !== 'test') {  //dont use test env
+  config = {
+    host: process.env.PSQL_HOSTNAME,
+    user: process.env.PSQL_USER,
+    password: process.env.PSQL_PASSWORD,
+    port: process.env.PSQL_PORT,
+    database: process.env.PSQL_DBNAME,
+  }
+}
+else {  //use test environment (No test database currently)
+  console.log('testing server currently unimplimented, using main db')
+  config = {
+    host: process.env.PSQL_HOSTNAME,
+    user: process.env.PSQL_USER,
+    password: process.env.PSQL_PASSWORD,
+    port: process.env.PSQL_PORT,
+    database: process.env.PSQL_DBNAME,
+  }
+}
+
+const pool = new Pool(config);
+
+pool.on('connect', () => {
+  console.log('[postgres] Sucessful connection to postgres instance at [' + config.host + ']');
+})
+
+const query = (text, params) => pool.query(text, params).catch(err => {throw err})
+
+module.exports = {
+  query
+}
