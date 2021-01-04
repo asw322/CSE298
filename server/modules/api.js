@@ -3,6 +3,10 @@ const router = express.Router();
 var db = require('../datastore/datastore.js');
 var moment = require('moment');
 
+//node-pg connect through datastore.js pool 
+const db = require('../datastore')
+
+
 router.get('/posts',  (req, res) => {
   var data = db.get('posts').value();
   res.status(200).json(data);
