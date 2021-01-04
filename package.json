@@ -17,6 +17,6 @@
   "private": true,
   "license": "UNLICENSED",
   "dependencies": {
-    "postgres": "^1.0.2"
+  "postgres": "^1.0.2"
   }
 }

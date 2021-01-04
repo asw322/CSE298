@@ -7,7 +7,7 @@
     </div>
     <div>
       <div v-for="(post, index) in posts" :key="index">
-        <div class="card my-5">
+        <div class="card my-5 animate__animated animate__fadeInDown" >
           <div class="card-header">
             {{post.date}}
           </div>
@@ -74,6 +74,7 @@ export default class Posts extends Vue {
         console.error(err.response);
       })
   }
+
 }
 </script>
 
