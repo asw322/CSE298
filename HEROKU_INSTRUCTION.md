@@ -2,9 +2,10 @@
 
 Prerequisite: 
 1. Have psql (try psql --version)
-You can download from brew using brew install postgres
-Then run brew services start postgres to start psql 
-2. Need the database credentials from Heroku 
+    Mac setup:
+    - You can download from brew using brew install postgres
+    - Then run brew services start postgres to start psql 
+2. Need the database credentials from Heroku (NOTE: Heroku connection data below changes repeatedly)
 Host        ec2-52-2-127-5.compute-1.amazonaws.com
 Database    d2kvcrg92njeso
 User        cbeublxgiqsend
@@ -21,4 +22,9 @@ Run:
 > Enter the password: (from above) 
 > \d (to see all the tables)
 
+
+# Question
+
+How do connect a heroku postgres database to a node project? 
+How to set up migrations from project to database?
 

@@ -18,9 +18,11 @@
     "ejs": "~2.5.7",
     "express": "^4.17.1",
     "lowdb": "^1.0.0",
-    "moment": "^2.20.1"
+    "moment": "^2.20.1",
+    "pg": "^8.5.1"
   },
   "devDependencies": {
+    "@prisma/cli": "^2.13.1",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
     "nodemon": "2.0.4"
