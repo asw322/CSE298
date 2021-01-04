@@ -27,3 +27,8 @@ Run:
 > \d (to see all the tables)
 
 
+# Question
+
+How do connect a heroku postgres database to a node project? 
+How to set up migrations from project to database?
+
