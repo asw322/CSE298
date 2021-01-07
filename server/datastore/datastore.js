@@ -14,5 +14,5 @@ const db = low(adapter);
 module.exports = db;
 
 
-v-selectMenu
-vue-selectbar
+// v-selectMenu
+// vue-selectbar

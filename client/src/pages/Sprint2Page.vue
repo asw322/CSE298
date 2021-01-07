@@ -11,7 +11,8 @@
       <a v-bind:href="coursesiteLink" target="_blank" class="btn btn-primary">Coursesite</a>
     </div>
     <p class="mt-3">{{ description }}</p>
-    <Tags />
+    <!-- <script src="//unpkg.com/element-ui@2.14.1/lib/index.js"></script> -->
+    <tags></tags>
   </div>
 </template>
 
