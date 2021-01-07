@@ -12,3 +12,7 @@ else {
 const db = low(adapter);
 
 module.exports = db;
+
+
+v-selectMenu
+vue-selectbar
