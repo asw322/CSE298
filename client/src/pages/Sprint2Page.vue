@@ -11,13 +11,20 @@
       <a v-bind:href="coursesiteLink" target="_blank" class="btn btn-primary">Coursesite</a>
     </div>
     <p class="mt-3">{{ description }}</p>
+    <Tags />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import Tags from '../components/Tags.vue';
 
-@Component
+
+@Component({
+  components: {
+    Tags
+  }
+})
 export default class Sprint1Page extends Vue {
   private title: string = 'Sprint Two: Working better with your teammates.';
   private description: string = 'This sprint is about working with your teammates. This will involve the backend implementing the singleton design pattern into the API call logic of the app. This will also involve developing a team-wide strategy for how you are going to cache local data - leveraging localstorage and cookies. The backend will need to make a request to an external API, transform the data and then create an endpoint that the frontend can call.';
