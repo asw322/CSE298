@@ -50,16 +50,32 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-// import Element, { Tag, Button, Input } from 'element-ui';
+import TagsDataService from '../services/TagsDataService';
 
-// Vue.use(Element, Tag, Button, Input);
+
+// Setting up TagsDataService
+interface Tag {
+  // set up data fields
+  uid: string, 
+  tag: string
+}
 
 @Component({
-  // components: {
-  //   Element
-  // }
+  // Empty
 })
+
 export default class Tags extends Vue {
+  private tags: Tag[] = [];
+  private inputValue = '';
+  private formError: string = '';
+
+  // SAMPLE DATABASE FOR EL-TAGS (will transition to Heroku now)
+  private dynamicTags = ['Tag 1', 'Tag 2', 'Tag 3'  ];
+  private inputVisible = false;
+  
+
+
+  // SAMPLE DATABASE FOR V-SELECTMENU
   // data() {
   //   return {
   //     tags: [
@@ -69,10 +85,14 @@ export default class Tags extends Vue {
   //     ]
   //   };
   // }
-  private dynamicTags = ['Tag 1', 'Tag 2', 'Tag 3'];
-  private inputVisible = false;
-  private inputValue = '';
 
+
+  /**
+   * METHODS FOR TAGS
+   */
+
+
+  // 
   public handleClose(tag) {
     // PUT REQUEST DB
     // DELETE THE USE COOKIES FOR THAT TAGS
@@ -84,6 +104,8 @@ export default class Tags extends Vue {
       this.$refs.saveTagInput.$refs.input.focus();
     });
   }
+
+  // Handles adding a new tag
   public handleInputConfirm() {
     let inputValue = this.inputValue;
     if(inputValue) {
@@ -92,6 +114,30 @@ export default class Tags extends Vue {
     this.inputVisible = false;
     this.inputValue = '';
   }
+
+
+  // METHODS FOR TAGSDATASERVICE
+  created() {
+
+  }
+  public tags_addNewTagByUID() {
+    const newTag: Tag = {
+      uid: "U1",  // Need to modify this to the user's UID
+      tag: this.inputValue
+    }
+
+    TagsDataService.addNewTagByUID(newTag)
+      .then(response => {
+        this.tags.unshift(response.data);
+      })
+      .catch(err => {
+        this.formError = err.response.statusText;
+      })
+  }
+  public tags_deleteTagByUID() {
+
+  }
+
 }
 </script>
 
