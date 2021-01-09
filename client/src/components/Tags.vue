@@ -1,9 +1,9 @@
 <template>
   <div>
-
+    <v-selectmenu :data="list" class="form-control" v-model="value">SAMPLE TEXT</v-selectmenu>
     <!-- https://vuejsexamples.com/a-simple-and-highly-customized-menu-solution-for-vue2/ -->
     <!-- <p1>SIMPLE HELLO TAGS</p1> -->
-    <br>
+    <!-- <br> -->
 
     <!-- <el-tag>Tag 1</el-tag>
     <el-tag type="success">Tag 2</el-tag>
@@ -74,17 +74,7 @@ export default class Tags extends Vue {
   private inputVisible = false;
   
 
-
-  // SAMPLE DATABASE FOR V-SELECTMENU
-  // data() {
-  //   return {
-  //     tags: [
-  //       {name: 'Tag 10', type: ''},
-  //       {name: 'Tag 11', type: ''},
-  //       {name: 'Tag 12', type: ''}
-  //     ]
-  //   };
-  // }
+  // SAMPLE DATABASE FOR V-SELECTMENU 
 
 
   /**
