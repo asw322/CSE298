@@ -12,6 +12,7 @@
     </div>
     <p class="mt-3">{{ description }}</p>
     <!-- <script src="//unpkg.com/element-ui@2.14.1/lib/index.js"></script> -->
+    <tags_list></tags_list>
     <tags></tags>
   </div>
 </template>
@@ -19,11 +20,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Tags from '../components/Tags.vue';
+import Tags_list from '../components/Tags_list.vue';
 
 
 @Component({
   components: {
-    Tags
+    Tags,
+    Tags_list
   }
 })
 export default class Sprint1Page extends Vue {

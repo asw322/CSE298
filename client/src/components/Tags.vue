@@ -1,9 +1,6 @@
 <template>
   <div>
-    <v-selectmenu :data="list" class="form-control" v-model="value">SAMPLE TEXT</v-selectmenu>
     <!-- https://vuejsexamples.com/a-simple-and-highly-customized-menu-solution-for-vue2/ -->
-    <!-- <p1>SIMPLE HELLO TAGS</p1> -->
-    <!-- <br> -->
 
     <!-- <el-tag>Tag 1</el-tag>
     <el-tag type="success">Tag 2</el-tag>
