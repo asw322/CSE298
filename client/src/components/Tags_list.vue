@@ -1,7 +1,6 @@
 <template>
     <div>
-        <p1>hello from tags list</p1>
-        <v-selectmenu :data="list" class="form-control" v-model="value">SAMPLE TEXT</v-selectmenu>
+        <v-selectmenu :data="list" class="form-control" v-model="value">Subscribed Tags</v-selectmenu>
         <!-- https://vuejsexamples.com/a-simple-and-highly-customized-menu-solution-for-vue2/ -->
     </div>
 </template>
@@ -11,7 +10,18 @@ import TagsDataService from '../services/TagsDataService';
 
 @Component
 export default class Tags_list extends Vue {
-    
+    private list = [
+        {
+            id: 1,
+            name: 'Chicago Bulls',
+            desc: 'The description for the bulls!'
+        },
+        {
+            id: 2, 
+            name: 'Cleveland Cavalier',
+            desc: 'The description for the cavaliers!'
+        }
+    ];
 }
 
 </script>
