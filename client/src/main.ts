@@ -7,7 +7,9 @@ import ElementUI from 'element-ui';
 
 
 Vue.use(ElementUI);
-Vue.use(vSelectMenu);
+Vue.use(vSelectMenu, {
+  language: 'en'
+});
 
 
 Vue.config.productionTip = false;

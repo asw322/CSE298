@@ -23,13 +23,13 @@ export default class Tags_list extends Vue {
     private list = [
         {
             id: 1,
-            name: 'Chicago Bulls',
-            desc: 'The description for the bulls!'
+            name: 'r/funny',
+            desc: '- for funny things'
         },
         {
             id: 2, 
-            name: 'Cleveland Cavalier',
-            desc: 'The description for the cavaliers!'
+            name: 'r/meme',
+            desc: '- for meme things'
         }
     ];
 }
