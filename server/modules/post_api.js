@@ -32,7 +32,28 @@ console.log("Hello World without method");
 
 function getAllPost() {
     db
-        .query("SELECT * FROM post")
+        .query("SELECT * FROM post;")
+        .then(res => {
+            console.log(res.rows)
+            // status(200) to sent to front end
+        })
+        .catch(e => {
+            console.error(e.stack)
+            // status(404) to sent to front end
+        });
+}
+
+// router.get('/posts',  (req, res) => {
+//     var data = getAllPost();
+//     res.status(200).json(data);
+// });
+
+
+// Get all posts given tag
+// All posts that contain given tag (can we expand to list of tags as input?)
+function getPostsFromTag(tag) {
+    db
+        .query("SELECT * FROM post WHERE tag = " + "'" + tag + "';")
         .then(res => {
             console.log(res.rows)
             // status(200) to sent to front end
@@ -44,21 +65,25 @@ function getAllPost() {
 }
 
 
-
-
-
-
-// Get all posts given list of tags
-// All posts that contain one of the given tags 
-
-
 // Get all posts given a user 
 // All posts a user has created
-
+function getPostsFromUser(user) {
+    db
+        .query("SELECT * FROM post WHERE user = " + "'" + user + "';")
+        .then(res => {
+            console.log(res.rows)
+            // status(200) to sent to front end
+        })
+        .catch(e => {
+            console.error(e.stack)
+            // status(404) to sent to front end
+        });
+}
 
 
 // Given location (via cookie) get weather condition
 // Access using weather api
 
+// I think this one can be handled via the singleton
 
 module.exports = router;
