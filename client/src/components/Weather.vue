@@ -1,88 +1,89 @@
 <template>
-  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 60 ? 'warm' : ''">
-    <main>
-      
-        <div class="search-box">
-          <input 
-            type="text" 
-            class="search-bar" 
-            placeholder="Search..."
-            v-model="query"
-            @keypress="fetchWeather"
-          />
+    <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 60 ? 'warm' : '' ">
+        <main>
+            <div class="search-box">
+                <!-- User input section -->
+                <input
+                    type="text"
+                    class="search-bar"
+                    placeholder="Search..."
+                    v-model="query"
+                    @keypress="fetchWeather"
+                />
 
-          <!-- text with instructions  -->
-          <div style="margin-top: 5px; text-align: center;">
-            <p style="font-size: 1em; color: white">Enter the "city, state" e.g. "madison, wisconsin"</p>
-          </div>
-        </div>
-        
-      <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
-        <div class="location-box">
-          <div class="location" v-if="city !== ''">{{ this.capitalizeFirstLetter(city)}}, {{ weather.sys.country }}</div>
-          <div class="location" v-else>{{  weather.name  }}, {{ weather.sys.country }}</div>
-          
-          <div class="weather-box">
-            <div class="temp">{{ Math.round(weather.main.temp) }}°f</div>
-            <div class="min_max">{{Math.round(weather.main.temp_min)}} ↓ {{Math.round(weather.main.temp_max)}} ↑</div>
-            <div class="weather">{{weather.weather[0].description}} </div>
-          </div>
-        </div>
-      </div>
+                <!-- text with instructions -->
+                <div style="margin-top: 5px; text-align: center;">
+                    <p style="font-size: 1em; color: white">Enter the "city, state" e.g. "madison, wisconsin</p>
+                </div>
+            </div>
 
-    </main>
-  </div>
+            <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
+                <div class="location-box">
+                    <div class="location" v-if="city !== ''">
+                        {{ this.capitalizeFirstLetter(city)}}, {{ weather.sys.country }}
+                    </div>
+                    <div class="location" v-else>
+                        {{  weather.name  }}, {{ weather.sys.country }}
+                    </div>
+
+                    <div class="weather-box">
+                        <div class="temp">{{ Math.round(weather.main.temp) }}°f</div>
+                        <div class="min_max">{{Math.round(weather.main.temp_min)}} ↓ {{Math.round(weather.main.temp_max)}} ↑</div>
+                        <div class="weather">{{weather.weather[0].description}} </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </template>
+<script lang="ts">
+    import { Component, Vue } from 'vue-property-decorator';
 
-<script>
-export default {
-  name: 'App',
-  data() {
-    return {
-      api_key: '38999729e8c4a9563ab7381ed0187db1',
-      url_base: 'https://api.openweathermap.org/data/2.5/',
-      query: '',
-      weather: {},
-      city: '',
-      state: ''
-    }
-  },
-  methods: {
-    fetchWeather(e) {
-      for (var i = 0; i < 2; i++) {
-        if (e.key == "Enter") {
-          // fetch() is from JS
-          if (this.query.split(",").length == 2) {
-            this.city = this.query.split(",")[0].trim();
-            this.state = this.query.split(",")[1].trim();
-          }
-          fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
-            .then(res => {
-              return res.json();
-            }).then(this.setResults);
+    @Component({
+        // Empty 
+    })
+    export default class Weather extends Vue {
+        private api_key: string = '38999729e8c4a9563ab7381ed0187db1';
+        private url_base: string = 'https://api.openweathermap.org/data/2.5/';
+        private query: string = '';
+        private weather = {};
+        private city: string = '';
+        private state: string = '';
+
+        public fetchWeather(e) {
+            for(var i = 0; i < 2; i++) {
+                if(e.key == "Enter") {
+                    if(this.query.split(",").length == 2) {
+                        this.city = this.query.split(",")[0].trim();
+                        this.state = this.query.split(",")[1].trim();
+                    }
+                    fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
+                      .then(res => {
+                          return res.json();
+                      }).then(this.setResults);
+                }
+            }
         }
-      }
-    },
-    setResults(results) {
-      this.weather = results;
-    },
 
-    // from https://stackoverflow.com/questions/4878756/how-to-capitalize-first-letter-of-each-word-like-a-2-word-city
-    capitalizeFirstLetter(string) {
-      return string.toLowerCase()
-        .split(' ')
-        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-        .join(' ');
+        // Helper function to fetchWeather
+        public setResults(results) {
+            this.weather = results;
+        }
+
+        public capitalizeFirstLetter(string) {
+            return string.toLowerCase()
+                .split(' ')
+                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ');
+        }
     }
-  }
-}
 </script>
 
-<style>
+<style scoped>
 *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -92,21 +93,21 @@ body {
 }
 
 #app {
-  background-image: url('./assets/cold-bg.jpg');
+  /* background-image: url('./assets/cold-bg.jpg'); */
   background-size: cover;
   background-position: bottom;
   transition: 0.4s;
 }
 
 #app.warm {
-  background-image: url('./assets/warm-bg.jpg')
+  /* background-image: url('./assets/warm-bg.jpg') */
 }
 
 main {
   min-height: 100vh;
   padding: 25px;
 
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75));
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)); */
 }
 
 .search-box {
