@@ -7,14 +7,12 @@ const { getIterator } = require('core-js');
 
 console.log("Hello World without method");
 
-//node-pg connect through datastore.js pool 
-//DB QUERY TEMPLATE, FOLLOW THIS ALAN 😁
-// db.query('SELECT *', [req.params.id], (err, res) => {
-//   if (err) {
-//     return next(err)
-//   }
-//   res.send(res.rows[0])
-// })
+
+router.get('/', function (req, res) {
+    console.log("hello workedd");
+    res.send('hello world');
+});
+
 
 
 // Get all posts 
@@ -32,27 +30,62 @@ console.log("Hello World without method");
 
 function getAllPost() {
     var connectionSuccess = true;
-    router.get('/posts', (req, res) => {
+    router.get('/posts', (req, router_res) => {
         var data = db
         .query("SELECT * FROM post;")
-        .then(res => {
-            console.log(res.rows);
+        .then(db_res => {
+            router_res = db_res;
+            console.log(router_res.rows);
         })
         .catch(e => {
             console.error(e.stack)
             connectionSuccess = false;
         });
-    });    
 
-    if (connectionSuccess) {
-        res.status(200).json(data);
-    } else {
-        res.status(404).json(data);
-    }
+        if (connectionSuccess) {
+            router_res.status(200).json(data);
+        } else {
+            router_res.status(404).json(data);
+        }
+    });
 }
+
+// getAllPost();
+
+
+function test_getAllPost() {
+    var connectionSuccess = true;
+    router.get('/posts', (req, router_res) => {
+        console.log("hello tester");
+    });
+}
+
+// test_getAllPost();
 
 // Get all posts given tag
 // All posts that contain given tag (can we expand to list of tags as input?)
+// function getPostsFromTag(tag) {
+//     var connectionSuccess = true;
+//     router.get('/posts', (req, router_res) => {
+//         var data = db
+//         .query("SELECT * FROM post WHERE tag = " + "'" + tag + "';")
+//         .then(db_res => {
+//             router_res = db_res;
+//             console.log(res.rows);
+//         })
+//         .catch(e => {
+//             console.error(e.stack)
+//             connectionSuccess = false;
+//         });
+
+//         if (connectionSuccess) {
+//             router_res.status(200).json(data);
+//         } else {
+//             router_res.status(404).json(data);
+//         }
+//     });
+// }
+
 function getPostsFromTag(tag) {
     db
         .query("SELECT * FROM post WHERE tag = " + "'" + tag + "';")
@@ -65,21 +98,30 @@ function getPostsFromTag(tag) {
             // status(404) to sent to front end
         });
 }
-
+// getPostsFromTag("cooking");
 
 // Get all posts given a user 
 // All posts a user has created
-function getPostsFromUser(user) {
-    db
+function getPostsFromUser(tag) {
+    var connectionSuccess = true;
+    router.get('/posts', (req, router_res) => {
+        var data = db
         .query("SELECT * FROM post WHERE user = " + "'" + user + "';")
-        .then(res => {
-            console.log(res.rows)
-            // status(200) to sent to front end
+        .then(db_res => {
+            router_res = db_res;
+            console.log(res.rows);
         })
         .catch(e => {
             console.error(e.stack)
-            // status(404) to sent to front end
+            connectionSuccess = false;
         });
+
+        if (connectionSuccess) {
+            router_res.status(200).json(data);
+        } else {
+            router_res.status(404).json(data);
+        }
+    });
 }
 
 

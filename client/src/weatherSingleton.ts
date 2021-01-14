@@ -1,47 +1,50 @@
 import { JsxEmit } from "typescript";
 
-export class weatherSingleton {
-    private static instance: weatherSingleton;
-    private api_key: string;
-    private url_base: string;
-    private city: string;
-    private state: string;
+export class WeatherSingleton {
+    private static instance: WeatherSingleton;
+
+    private static api_key: string = '38999729e8c4a9563ab7381ed0187db1';
+    private static url_base: string = 'https://api.openweathermap.org/data/2.5/';
+
+    // By default set to new your city
+    private static city: string = 'New York City';
+    private static state: string = 'New York';
 
     private constructor(){
-        this.api_key = '38999729e8c4a9563ab7381ed0187db1';
-        this.url_base = 'https://api.openweathermap.org/data/2.5/';
-        this.city = 'New York City';
-        this.state = 'New York';
+        // Empty
     }
 
     // create new instance only when there isn't already an instance 
-    public static getInstance(): weatherSingleton {
-        if (!weatherSingleton.instance) {
-            weatherSingleton.instance = new weatherSingleton();
+    public static getInstance(): WeatherSingleton {
+        if (!WeatherSingleton.instance) {
+            WeatherSingleton.instance = new WeatherSingleton();
         }
-        return weatherSingleton.instance;
+        return WeatherSingleton.instance;
     }
 
-    public static getWeather(){
-        fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
-            .then(res => {
-                return res.json();
-            }).then(this.setResults);
-    }
+    // https://api.openweathermap.org/data/2.5/weather?q=New York,New York&units=imperial&APPID=38999729e8c4a9563ab7381ed0187db1
 
-    public getCity(): String {
+    public static getWeather() {
+        fetch(this.url_base + "weather?q=" + this.state + "," + this.city + "&units=imperial&APPID=" + this.api_key)
+            .then(response => { 
+                return response.json()
+            })
+            .then(data => console.log(data));
+    }
+    
+    public static getCity(city: string): String {
         return this.city;
     }
 
-    public getState(): String {
+    public static getState(state: string): String {
         return this.state;
     }
 
-    public setCity(inputCity: string){
+    public static setCity(inputCity: string){
         this.city = inputCity;
     }
 
-    public setState(state: string){
+    public static setState(state: string){
         this.state = state;
     }
 

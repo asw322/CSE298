@@ -38,36 +38,37 @@
 </template>
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import { weatherSingleton } from '../weatherSingleton';
+    import { WeatherSingleton } from '../WeatherSingleton';
     @Component({
         // Empty 
     })
     export default class Weather extends Vue {
-      // private api_key: string = '38999729e8c4a9563ab7381ed0187db1';
-      // private url_base: string = 'https://api.openweathermap.org/data/2.5/';
+      private api_key: string = '38999729e8c4a9563ab7381ed0187db1';
+      private url_base: string = 'https://api.openweathermap.org/data/2.5/';
       private query: string = '';
       private weather = {};
-      // private city: string = '';
-      // private state: string = '';
-
-      let weatherObj: weatherSingleton = weatherSingleton.getInstance();
+      private city: string = "New York City";
+      private state: string = "New York";
 
       public fetchWeather(e) {
         for(var i = 0; i < 2; i++) {
           if(e.key == "Enter") {
               if(this.query.split(",").length == 2) {
-                  weatherObj.setCity = this.query.split(",")[0].trim();
-                  weatherObj.state = this.query.split(",")[1].trim();
+                this.city = this.query.split(",")[0].trim();
+                this.state = this.query.split(",")[1].trim();
+                  // WeatherSingleton.setCity(this.query.split(",")[0].trim());
+                  // WeatherSingleton.setState(this.query.split(",")[0].trim());
+                  // this.setResults(WeatherSingleton.getWeather());
               }
-              // fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
-              //   .then(res => {
-              //       return res.json();
-              //   }).then(this.setResults);
+              fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
+                .then(res => {
+                    return res.json();
+                }).then(this.setResults);
           }
         }
       }
 
-      // Helper function to fetchWeather
+      // Setter function to fetchWeather
       public setResults(results) {
           this.weather = results;
       }
