@@ -12,7 +12,7 @@
                 />
 
                 <!-- text with instructions -->
-                <div style="margin-top: 5px; text-align: center;">
+                <div style="margin-top: 5px; text-align: left;">
                     <p style="font-size: 1em; color: white">Enter the "city, state" e.g. "madison, wisconsin</p>
                 </div>
             </div>
@@ -38,44 +38,46 @@
 </template>
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-
+    import { weatherSingleton } from '../weatherSingleton';
     @Component({
         // Empty 
     })
     export default class Weather extends Vue {
-        private api_key: string = '38999729e8c4a9563ab7381ed0187db1';
-        private url_base: string = 'https://api.openweathermap.org/data/2.5/';
-        private query: string = '';
-        private weather = {};
-        private city: string = '';
-        private state: string = '';
+      // private api_key: string = '38999729e8c4a9563ab7381ed0187db1';
+      // private url_base: string = 'https://api.openweathermap.org/data/2.5/';
+      private query: string = '';
+      private weather = {};
+      // private city: string = '';
+      // private state: string = '';
 
-        public fetchWeather(e) {
-            for(var i = 0; i < 2; i++) {
-                if(e.key == "Enter") {
-                    if(this.query.split(",").length == 2) {
-                        this.city = this.query.split(",")[0].trim();
-                        this.state = this.query.split(",")[1].trim();
-                    }
-                    fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
-                      .then(res => {
-                          return res.json();
-                      }).then(this.setResults);
-                }
-            }
-        }
+      let weatherObj: weatherSingleton = weatherSingleton.getInstance();
 
-        // Helper function to fetchWeather
-        public setResults(results) {
-            this.weather = results;
+      public fetchWeather(e) {
+        for(var i = 0; i < 2; i++) {
+          if(e.key == "Enter") {
+              if(this.query.split(",").length == 2) {
+                  weatherObj.setCity = this.query.split(",")[0].trim();
+                  weatherObj.state = this.query.split(",")[1].trim();
+              }
+              // fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
+              //   .then(res => {
+              //       return res.json();
+              //   }).then(this.setResults);
+          }
         }
+      }
 
-        public capitalizeFirstLetter(string) {
-            return string.toLowerCase()
-                .split(' ')
-                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ');
-        }
+      // Helper function to fetchWeather
+      public setResults(results) {
+          this.weather = results;
+      }
+
+      public capitalizeFirstLetter(string) {
+          return string.toLowerCase()
+              .split(' ')
+              .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+              .join(' ');
+      }
     }
 </script>
 
@@ -93,21 +95,21 @@ body {
 }
 
 #app {
-  /* background-image: url('./assets/cold-bg.jpg'); */
+  background-image: url('../assets/cold-bg.jpg');
   background-size: cover;
   background-position: bottom;
   transition: 0.4s;
 }
 
 #app.warm {
-  /* background-image: url('./assets/warm-bg.jpg') */
+  background-image: url('../assets/warm-bg.jpg')
 }
 
 main {
   min-height: 100vh;
   padding: 25px;
 
-  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)); */
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75));
 }
 
 .search-box {
@@ -117,7 +119,7 @@ main {
 
 .search-box .search-bar {
   display: block;
-  width: 100%;
+  width: 50%;
   padding: 15px;
   
   color: #313131;
@@ -141,7 +143,7 @@ main {
 }
 
 .location-box .location {
-  color: #FFF;
+  color: white;
   text-align: center;
   margin-bottom: 5px;
 
@@ -153,12 +155,12 @@ main {
 
 .weather-box {
   text-align: center;
+  color: #fff;
 }
 
 .weather-box .temp {
   display: inline-block;
   padding: 10px 25px;
-  color: #FFF;
   font-size: 102px;
   font-weight: 900;
 
@@ -171,7 +173,6 @@ main {
 }
 
 .weather-box .weather {
-  color: #FFF;
   font-size: 48px;
   font-weight: 700;
   font-style: italic;
@@ -179,7 +180,6 @@ main {
 }
 
 .weather-box .min_max {
-  color: #FFF;
   font-size: 48px;
   font-weight: 700;
   font-style: italic;

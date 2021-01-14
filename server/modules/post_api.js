@@ -31,23 +31,25 @@ console.log("Hello World without method");
 // db.end();
 
 function getAllPost() {
-    db
+    var connectionSuccess = true;
+    router.get('/posts', (req, res) => {
+        var data = db
         .query("SELECT * FROM post;")
         .then(res => {
-            console.log(res.rows)
-            // status(200) to sent to front end
+            console.log(res.rows);
         })
         .catch(e => {
             console.error(e.stack)
-            // status(404) to sent to front end
+            connectionSuccess = false;
         });
+    });    
+
+    if (connectionSuccess) {
+        res.status(200).json(data);
+    } else {
+        res.status(404).json(data);
+    }
 }
-
-// router.get('/posts',  (req, res) => {
-//     var data = getAllPost();
-//     res.status(200).json(data);
-// });
-
 
 // Get all posts given tag
 // All posts that contain given tag (can we expand to list of tags as input?)
