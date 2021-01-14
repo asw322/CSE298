@@ -3,6 +3,9 @@ const path       = require('path');       // Node.js library to work with filepa
 const cors       = require('cors');
 const vueHistory = require('connect-history-api-fallback');
 const apiRoutes  = require('./modules/api.js');
+const post_apiRoutes = require('./modules/post_api.js');
+const tags_apiRoutes = require('./modules/tags_api.js');
+const user_apiRoutes = require('./modules/user_api.js');
 require('dotenv').config();            // Loads environment variables from a local .env file
 
 /* Constants for making the app run */
@@ -28,6 +31,9 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
     - all routes inside will be: http:localhost:[PORT]/api/[your-defined-endpoint]
 */
 app.use('/api', apiRoutes); // API routes should be below '/api'
+app.use('/post_api', post_apiRoutes);
+app.use('/tags_api', tags_apiRoutes);
+app.use('/user_api', user_apiRoutes);
 
 app.use(function (err, req, res, next) {
   status = err.status || 500

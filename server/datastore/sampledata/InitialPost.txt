@@ -1,1 +1,9 @@
 INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U1', 'funny', 'This is some sample text, haha', 0, 0);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U1', 'cooking', 'I really like to eat pie', 10, 2);
+
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U2', 'memes', 'cats are awesome', 10, 2);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U2', 'funny', 'I really like to eat pie', 10, 2);
+
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U3', 'funny', 'I really like to eat pie', 10, 2);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U4', 'funny', 'I really like to eat pie', 10, 2);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U4', 'funny', 'I really like to eat pie', 10, 2);
