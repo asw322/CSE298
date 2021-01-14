@@ -14,6 +14,7 @@
     <!-- <script src="//unpkg.com/element-ui@2.14.1/lib/index.js"></script> -->
     <tags_list></tags_list>
     <tags></tags>
+    <weather></weather>
   </div>
 </template>
 
@@ -21,12 +22,14 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Tags from '../components/Tags.vue';
 import Tags_list from '../components/Tags_list.vue';
+import Weather from '../components/Weather.vue';
 
 
 @Component({
   components: {
     Tags,
-    Tags_list
+    Tags_list,
+    Weather
   }
 })
 export default class Sprint1Page extends Vue {
