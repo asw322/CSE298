@@ -84,7 +84,6 @@ export class WeatherSingleton {
         this.state = inputState;
     }
 
-
     // public static setMaxTemp(input: number){
     //     this.max_temp = input;
     // }
