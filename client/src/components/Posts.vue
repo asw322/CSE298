@@ -43,18 +43,19 @@ export default class Posts extends Vue {
     PostsDataService.getAll()
       .then(response => {
         console.log("[Get Post]")
-        console.log(response.data)
+        // console.log(response.data)
         response.data.reverse();
 
         for (let obj of response.data) {
             let myObj = {
-                id: obj.id,
-                text: obj.text,
-                date: obj.date
+                id: obj.pid,    // id = id of the post
+                text: obj.message,
+                date: ''
             }
 
             this.posts.push(myObj);
         }
+        console.log(this.posts);
 
       })
       .catch(err => {
@@ -64,6 +65,7 @@ export default class Posts extends Vue {
 
 
   public addPost(): void {
+    console.log("ADD POST FROM POSTS");
     const newPost: Post = {
       text: this.formInput
     }

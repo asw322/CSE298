@@ -66,8 +66,8 @@
 
                 this.$cookies.set("city_state_storage", this.city + ", " + this.state);
               }
-              // fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
-              fetch(WeatherSingleton.getURL())
+              fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
+              // fetch(WeatherSingleton.getURL())
                 .then(res => {
                     return res.json();
                 }).then(this.setResults);

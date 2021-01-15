@@ -7,12 +7,6 @@ const { getIterator } = require('core-js');
 
 console.log("Hello World without method");
 
-
-router.get('/sprint2', function (req, res) {
-    console.log("hello worked");
-    res.send('hello world');
-});
-
 // Get all posts 
 // All posts in the database
 // db.query('SELECT * FROM post', (err, res) => {
@@ -66,6 +60,47 @@ router.get('/posts', function (req, res) {
             res.status(400).send(err);
         })
     console.log("grabbed something from post_api");
+});
+
+router.post('/posts', async function (req, res) {
+    var connectionSuccess = true;
+    console.log("BACKEND POST FUNCTION");
+    console.log(req);
+
+    var pid_query = "SELECT pid as maximum FROM post ORDER BY pid DESC LIMIT 1 ";
+
+    var inc = 0;
+
+    // Async function
+    var pid_data = await db
+        .query(pid_query)
+        .then(db_res => {
+            inc = db_res.rows[0].maximum;   
+            console.log(inc);
+        })
+        .catch(err => {
+            console.log("No Yeah No")
+        })
+    
+    var sql ="INSERT INTO post (pid, uid, tag, message, upvote, downvote) VALUES ($1, $2, $3, $4, $5, $6)";
+    var text = req.body.text;
+
+    var data = db
+        .query(sql, [
+            (inc + 1),
+            'U1',
+            'funny',
+            text,
+            0,
+            0
+        ])
+        .then(db_res => {
+            console.log(db_res.rows)
+            console.log("Post sent to backend")
+        })
+        .catch(e => {
+            console.error(e.stack)
+        })
 });
 
 // Get all posts given tag
