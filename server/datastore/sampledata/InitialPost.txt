@@ -1,1 +1,18 @@
-INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES ('P1', 'U1', 'funny', 'This is some sample text, haha', 0, 0);
+NOTE: do not include ' in the post text (i.e. can't or aren't) if you are using single quotes to store string
+
+// already inserted
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (1, 'U1', 'funny', 'This is some sample text, haha', 0, 0);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (2, 'U1', 'cooking', 'I really like to eat pie', 10, 2);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (3, 'U1', 'politics', 'BIDEN is BAD!', 5, 6);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (4, 'U1', 'funny', 'Knock, knock. Whos there? Your mom.', 2, 0);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (5, 'U2', 'news', 'breaking: cats are awesome', 21, 6);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (6, 'U2', 'comp_sci', 'coders cant find jobs!', 6, 1);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (7, 'U2', 'politics', 'Trump is bad', 10, 10);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (8, 'U3', 'science', 'Vaccines have been completed!', 100, 2);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (9, 'U3', 'politics', 'UBI is essential for the future', 40, 12);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (10,'U4', 'science', 'Vaccines arent real!', 1, 51);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (11,'U4', 'surfing', 'cant wait for summer again', 3, 0);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (12,'U4', 'arts', 'LUAG got a 5 million $$$ donation!', 10, 2);
+INSERT INTO POST (PID, UID, TAG, MESSAGE, UPVOTE, DOWNVOTE) VALUES (13,'U4', 'cooking', 'tomatoe soup recipe!', 0, 0);
+
+// to be inserted
