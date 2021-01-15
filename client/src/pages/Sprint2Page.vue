@@ -27,8 +27,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import Tags from '../components/Tags.vue';
 import Tags_list from '../components/Tags_list.vue';
 import Weather from '../components/Weather.vue';
-import Posts from '../components/Posts.vue'
-import simple from '../components/simple.vue'
+import Posts from '../components/Posts.vue';
+import simple from '../components/simple.vue';
 
 
 @Component({
