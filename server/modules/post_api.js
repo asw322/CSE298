@@ -7,13 +7,10 @@ const { getIterator } = require('core-js');
 
 console.log("Hello World without method");
 
-
 router.get('/', function (req, res) {
     console.log("hello workedd");
     res.send('hello world');
 });
-
-
 
 // Get all posts 
 // All posts in the database

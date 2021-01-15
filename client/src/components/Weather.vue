@@ -54,13 +54,14 @@
         for(var i = 0; i < 2; i++) {
           if(e.key == "Enter") {
               if(this.query.split(",").length == 2) {
-                this.city = this.query.split(",")[0].trim();
-                this.state = this.query.split(",")[1].trim();
-                  // WeatherSingleton.setCity(this.query.split(",")[0].trim());
-                  // WeatherSingleton.setState(this.query.split(",")[0].trim());
-                  // this.setResults(WeatherSingleton.getWeather());
+                // this.city = this.query.split(",")[0].trim();
+                // this.state = this.query.split(",")[1].trim();
+                WeatherSingleton.setCity(this.query.split(",")[0].trim());
+                WeatherSingleton.setState(this.query.split(",")[0].trim());
+                // this.setResults(WeatherSingleton.getWeather());
               }
-              fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
+              // fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
+              fetch(WeatherSingleton.getURL())
                 .then(res => {
                     return res.json();
                 }).then(this.setResults);
