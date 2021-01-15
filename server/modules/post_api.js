@@ -13,8 +13,6 @@ router.get('/sprint2', function (req, res) {
     res.send('hello world');
 });
 
-
-
 // Get all posts 
 // All posts in the database
 // db.query('SELECT * FROM post', (err, res) => {
