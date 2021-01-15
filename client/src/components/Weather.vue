@@ -21,7 +21,6 @@
                 <div class="location-box">
                     <div class="location" v-if="city !== ''">
                         {{ this.capitalizeFirstLetter(city)}}, {{ weather.sys.country }}
-                        <!-- {{ WeatherSingleton.getCity() }}, {{ weather.sys.country }}  -->
                     </div>
                     <div class="location" v-else>
                         {{  weather.name  }}, {{ weather.sys.country }}
@@ -44,12 +43,12 @@
         // Empty 
     })
     export default class Weather extends Vue {
-      // private api_key: string = '38999729e8c4a9563ab7381ed0187db1';
-      // private url_base: string = 'https://api.openweathermap.org/data/2.5/';
+      private api_key: string = '38999729e8c4a9563ab7381ed0187db1';
+      private url_base: string = 'https://api.openweathermap.org/data/2.5/';
       private query: string = this.$cookies.get("city_state_storage") || '';
       private weather = {};
-      private city: string = WeatherSingleton.getCity();
-      private state: string = WeatherSingleton.getState();
+      private city: string = "New York City";
+      private state: string = "New York";
 
       created() {
         this.fetchWeather(this.$cookies.get("city_state_storage") || '');
@@ -57,17 +56,15 @@
 
       public fetchWeather(e) {
         for(var i = 0; i < 2; i++) {
-          if(e.key == "Enter" || this.$cookies != null) {
+          if(e.key == "Enter" || this.$cookies.get("city_state_storage") != null) {
               if(this.query.split(",").length == 2) {
-                // this.city = this.query.split(",")[0].trim();
-                // this.state = this.query.split(",")[1].trim();
-                WeatherSingleton.setCity(this.query.split(",")[0].trim());
-                WeatherSingleton.setState(this.query.split(",")[1].trim());
+                this.city = this.query.split(",")[0].trim();
+                this.state = this.query.split(",")[1].trim();
+                  // WeatherSingleton.setCity(this.query.split(",")[0].trim());
+                  // WeatherSingleton.setState(this.query.split(",")[0].trim());
+                  // this.setResults(WeatherSingleton.getWeather());
 
-                this.city = WeatherSingleton.getCity();
-                this.state = WeatherSingleton.getState();
-                this.$cookies.set("city_state_storage", WeatherSingleton.getCity()+ ", " + WeatherSingleton.getState());
-                // this.setResults(WeatherSingleton.getWeather());
+                this.$cookies.set("city_state_storage", this.city + ", " + this.state);
               }
               fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
               // fetch(WeatherSingleton.getURL())
