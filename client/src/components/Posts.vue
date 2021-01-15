@@ -42,13 +42,26 @@ export default class Posts extends Vue {
   created() {
     PostsDataService.getAll()
       .then(response => {
+        console.log("[Get Post]")
         console.log(response.data)
-        this.posts = response.data.reverse();
+        response.data.reverse();
+
+        for (let obj of response.data) {
+            let myObj = {
+                id: obj.id,
+                text: obj.text,
+                date: obj.date
+            }
+
+            this.posts.push(myObj);
+        }
+
       })
       .catch(err => {
         console.error(`Couldn't fetch all posts: ${err}`)
       })
   }
+
 
   public addPost(): void {
     const newPost: Post = {
@@ -58,6 +71,7 @@ export default class Posts extends Vue {
     PostsDataService.create(newPost)
       .then(response => {
         this.posts.unshift(response.data);
+        console.log("[Add Post]")
       })
       .catch(err => {
         this.formError = err.reponse.statusText;

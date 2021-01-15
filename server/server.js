@@ -22,7 +22,7 @@ app.use(cors());
 app.use(vueHistory());                              // Re-route all unknown pages to 'index.html' for client-side routing
 app.use(express.json());                            // Allow the backend to recognize an incoming Request Object as a JSON object
 app.use(express.urlencoded({ extended: true }));    // Allow the backend to parse incoming Request Objects with urlencoded payloads with nesting enabled
-//app.use(cookieParser());
+// app.use(cookieParser());
 
 /* Tells the application where public files like images, styling, and the minified javascript code lives */
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
@@ -31,9 +31,9 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
     - all routes inside will be: http:localhost:[PORT]/api/[your-defined-endpoint]
 */
 app.use('/api', apiRoutes); // API routes should be below '/api'
-app.use('/post_api', post_apiRoutes);
-app.use('/tags_api', tags_apiRoutes);
-app.use('/user_api', user_apiRoutes);
+app.use('/api/post_api', post_apiRoutes);
+app.use('/api/tags_api', tags_apiRoutes);
+app.use('/api/user_api', user_apiRoutes);
 
 app.use(function (err, req, res, next) {
   status = err.status || 500

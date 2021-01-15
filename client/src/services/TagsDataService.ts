@@ -1,5 +1,5 @@
 import https from './http-common';
-import Tag from '../components/Tags.vue';      // Not sure why this is giving an error!
+// import Tag from '../components/Tags.vue';      // Not sure why this is giving an error!
 
 
 /**
@@ -7,8 +7,6 @@ import Tag from '../components/Tags.vue';      // Not sure why this is giving an
  * We can create a new Tag interface just like in Tags.vue so we can 
  * pass in the parameter _tag: Tag
  */
-
-
 
 class TagsDataService {
     /**
@@ -19,9 +17,13 @@ class TagsDataService {
      */
 
 
+    getAll() {
+        return https.get('/tags_api/tags');
+    }
+
     // 1. Get all tags that the user has subscribed to 
     getAllByUID(id: string) {
-        return https.get(`/tags/${id}`);
+        return https.get(`/tags_api/tags/${id}`);
     }
     
     // 2. Add a new tag for the user
@@ -29,18 +31,15 @@ class TagsDataService {
     //     return https.post(`/tags/${id}`, tag);      // Should this be post or put? 
     // }
 
-
-
-
     // This is the new generalized version (HAVE NOT TESTED YET)
-    addNewTagByUID(_tag: Tag) {
-        return https.post(`/tags/${_tag.uid}`, _tag.tag);      // Should this be post or put? 
-    }
+    // addNewTagByUID(_tag: Tag) {
+    //     return https.post(`/tags/${_tag.uid}`, _tag.tag);      // Should this be post or put? 
+    // }
 
     // 3. Delete an existing tag belonging to the user
-    deleteTagByUID(id: string, tag: any) {
-        return https.delete(`/tags/${id}`, tag);
-    }
+    // deleteTagByUID(id: string, tag: any) {
+    //     return https.delete(`/tags/${id}`, tag);
+    // }
 }
 
 export default new TagsDataService();

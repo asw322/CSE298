@@ -4,8 +4,10 @@ import router from './router/router';
 import vSelectMenu from 'v-selectmenu';
 import 'element-ui/lib/theme-chalk/index.css';
 import ElementUI from 'element-ui';
+import VueCookies from 'vue-cookies';
 
 
+Vue.use(VueCookies);
 Vue.use(ElementUI);
 Vue.use(vSelectMenu, {
   language: 'en'

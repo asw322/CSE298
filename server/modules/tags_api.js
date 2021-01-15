@@ -4,6 +4,44 @@ const router = express.Router();
 const db = require('../datastore/datastore.js');
 var moment = require('moment');
 
+router.get('/tags/:id', function (req, res) {
+    var connectionSuccess = true;
+    
+    var sql = "SELECT * FROM user_channel WHERE uid=$1";
+    var data = db 
+        .query(sql, [req.params.id])
+        .then(db_res => {
+            connectionSuccess = true;
+            res.status(200).send(db_res.rows);
+        })
+        .catch(err => {                 // Error case
+            connectionSuccess = false;
+            console.error(err.stack);
+            res.status(400).send(err);
+        })
+    console.log("grabbed something from tags_api");
+});
+
+router.get('/tags', function (req, res)  {
+    var connectionSuccess = true;
+
+    var sql = "SELECT * FROM user_channel";
+
+    // Asynchronous function 
+    var data = db
+        .query(sql)
+        .then(db_res => {
+            connectionSuccess = true;
+            res.status(200).send(db_res.rows);
+        })
+        .catch(err => {
+            connectionSuccess = false;
+            console.log("Something from tags_api /tags went wrong");
+            res.status(400).send(err);
+        });
+});
+
+
 // Get all tags
 // Return all tags that have been created 
 function getAllTags() {
