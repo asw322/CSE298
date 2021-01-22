@@ -1,6 +1,6 @@
 //node-pg interface connection
 
-const { Pool } = require('pg')
+// const { Pool } = require('pg')
 const { Client } = require('pg')
 
 require('dotenv').config()
@@ -28,7 +28,13 @@ const client = new Client({
 //   });
 // }
 
-client.connect();
+client.connect(err => {
+  if (err) {
+    console.error('connection error', err.stack)
+  } else {
+    console.log('connected to heroku psql')
+  }
+});
 
 // NOTE: THIS QUERY WORKS 
 // client.query('SELECT * FROM users', (err, res) => {
@@ -37,13 +43,13 @@ client.connect();
 //   client.end()
 // })
 
-client.query('SELECT * FROM employees', (err, res) => {
-  if (err) throw err
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
-});
+// client.query('SELECT * FROM employees', (err, res) => {
+//   if (err) throw err
+//   for (let row of res.rows) {
+//     console.log(JSON.stringify(row));
+//   }
+//   client.end();
+// });
 
 // const pool = new Pool(config);
 
@@ -51,8 +57,12 @@ client.query('SELECT * FROM employees', (err, res) => {
 //   console.log('[postgres] Sucessful connection to postgres instance at [' + config.host + ']');
 // })
 
-const query = (text, params) => pool.query(text, params).catch(err => {throw err})
+// change to pool later 
+// const query = (text, params) => pool.query(text, params).catch(err => {throw err});
+const query = (text, params) => client.query(text, params).catch(err => {throw err});
+const end = (text, params) => client.end().catch(err => {throw err});
 
 module.exports = {
-  query
+  query,
+  end
 }

@@ -42,15 +42,30 @@ export default class Posts extends Vue {
   created() {
     PostsDataService.getAll()
       .then(response => {
-        console.log(response.data)
-        this.posts = response.data.reverse();
+        console.log("[Get Post]")
+        // console.log(response.data)
+        response.data.reverse();
+
+        for (let obj of response.data) {
+            let myObj = {
+                id: obj.pid,    // id = id of the post
+                text: obj.message,
+                date: ''
+            }
+
+            this.posts.push(myObj);
+        }
+        console.log(this.posts);
+
       })
       .catch(err => {
         console.error(`Couldn't fetch all posts: ${err}`)
       })
   }
 
+
   public addPost(): void {
+    console.log("ADD POST FROM POSTS");
     const newPost: Post = {
       text: this.formInput
     }
@@ -58,6 +73,7 @@ export default class Posts extends Vue {
     PostsDataService.create(newPost)
       .then(response => {
         this.posts.unshift(response.data);
+        console.log("[Add Post]")
       })
       .catch(err => {
         this.formError = err.reponse.statusText;

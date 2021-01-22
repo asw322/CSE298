@@ -11,13 +11,35 @@
       <a v-bind:href="coursesiteLink" target="_blank" class="btn btn-primary">Coursesite</a>
     </div>
     <p class="mt-3">{{ description }}</p>
+    <!-- <script src="//unpkg.com/element-ui@2.14.1/lib/index.js"></script> -->
+    <tags_list></tags_list>
+    <tags></tags>
+    <!-- <p1 v-bind:placeholder="hello()" required>Hello World</p1> -->
+    <h3>Messages Page</h3>
+    <simple> </simple>
+    <posts></posts>
+    <weather></weather>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import Tags from '../components/Tags.vue';
+import Tags_list from '../components/Tags_list.vue';
+import Weather from '../components/Weather.vue';
+import Posts from '../components/Posts.vue';
+import simple from '../components/simple.vue';
 
-@Component
+
+@Component({
+  components: {
+    Tags,
+    Tags_list,
+    Weather,
+    Posts,
+    simple
+  }
+})
 export default class Sprint1Page extends Vue {
   private title: string = 'Sprint Two: Working better with your teammates.';
   private description: string = 'This sprint is about working with your teammates. This will involve the backend implementing the singleton design pattern into the API call logic of the app. This will also involve developing a team-wide strategy for how you are going to cache local data - leveraging localstorage and cookies. The backend will need to make a request to an external API, transform the data and then create an endpoint that the frontend can call.';

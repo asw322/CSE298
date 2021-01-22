@@ -1,5 +1,5 @@
 CREATE TABLE POST (
-    pid varchar(100) NOT NULL PRIMARY KEY, 
+    pid int NOT NULL PRIMARY KEY, 
     uid varchar(100) NOT NULL, 
     tag varchar(100) NOT NULL,
     message varchar(1000), 
