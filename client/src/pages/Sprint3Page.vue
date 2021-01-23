@@ -11,13 +11,19 @@
       <a v-bind:href="coursesiteLink" target="_blank" class="btn btn-primary">Coursesite</a>
     </div>
     <p class="mt-3">{{ description }}</p>
+    <googleLoginComponent />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import GoogleLoginComponent from '../components/GoogleLogin.vue';
 
-@Component
+@Component({
+  components: {
+    GoogleLoginComponent
+  }
+})
 export default class Sprint1Page extends Vue {
   private title: string = 'Sprint Three: Working with your users.';
   private description: string = 'The final sprint is about adding the details needed to meet your users needs. This includes adding authentication, and implementing an authorization rule. It also includes integrating a cloud-computing service to implement additional app functionality. Finally, you will publish your project publicly using a hosting service.';
