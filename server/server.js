@@ -8,7 +8,7 @@ const tags_apiRoutes = require('./modules/tags_api.js');
 const user_apiRoutes = require('./modules/user_api.js');
 const google_apiRoutes = require('./modules/google_api.js');
 
-const passport = require('passport');
+// const passport = require('passport');
 
 require('dotenv').config();            // Loads environment variables from a local .env file
 
@@ -16,6 +16,11 @@ require('dotenv').config();            // Loads environment variables from a loc
 const app        = express();             // Creating the application instance
 
 
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// })
 
 
 /*

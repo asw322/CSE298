@@ -68,7 +68,8 @@ export default class GoogleLogin extends Vue {
                 console.log("from google login vue" + response);
             })
             .catch(err => {
-                this.formError = err.response.statusText;
+                // this.formError = err.response.statusText;
+                console.log(err);
             })
     }
 }
