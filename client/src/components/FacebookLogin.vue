@@ -7,7 +7,7 @@
         <!-- then grant access for us to use it -->
         <!-- currently: it hangs when you login into facebook -->
         <facebook-login class="button"
-            appId="326022817735322"
+            appId="1765471926950174"
             @login="onLogin"
             @logout="onLogout"
             @sdk-loaded="sdkLoaded">
@@ -44,7 +44,9 @@ export default class FacebookLogin extends Vue {
     public sdkLoaded(payload) {
         this.isConnected = payload.isConnected;
         this.FB = payload.FB;
-        if (this.isConnected) this.getUserData();
+        if (this.isConnected) {
+            this.getUserData();
+        }
     }
 
     public onLogin() {

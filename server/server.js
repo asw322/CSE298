@@ -6,10 +6,17 @@ const apiRoutes  = require('./modules/api.js');
 const post_apiRoutes = require('./modules/post_api.js');
 const tags_apiRoutes = require('./modules/tags_api.js');
 const user_apiRoutes = require('./modules/user_api.js');
+const google_apiRoutes = require('./modules/google_api.js');
+
+const passport = require('passport');
+
 require('dotenv').config();            // Loads environment variables from a local .env file
 
 /* Constants for making the app run */
 const app        = express();             // Creating the application instance
+
+
+
 
 /*
  * process.env is an object that contains all the environment variables loaded from a local .env file
@@ -34,6 +41,7 @@ app.use('/api', apiRoutes); // API routes should be below '/api'
 app.use('/api/post_api', post_apiRoutes);
 app.use('/api/tags_api', tags_apiRoutes);
 app.use('/api/user_api', user_apiRoutes);
+app.use('/api/google_api', google_apiRoutes);
 
 app.use(function (err, req, res, next) {
   status = err.status || 500

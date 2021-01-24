@@ -20,6 +20,8 @@
     "express": "^4.17.1",
     "lowdb": "^1.0.0",
     "moment": "^2.20.1",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "pg": "^8.5.1"
   },
   "devDependencies": {

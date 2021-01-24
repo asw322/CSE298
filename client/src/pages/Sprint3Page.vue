@@ -11,20 +11,20 @@
       <a v-bind:href="coursesiteLink" target="_blank" class="btn btn-primary">Coursesite</a>
     </div>
     <p class="mt-3">{{ description }}</p>
-    <!-- <googleLoginComponent /> -->
-    <facebookLoginComponent />
+    <googleLoginComponent ></googleLoginComponent>
+    <!-- <facebookLoginComponent /> -->
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import GoogleLoginComponent from '../components/GoogleLogin.vue';
-import FacebookLoginComponent from '../components/FacebookLogin.vue';
+// import FacebookLoginComponent from '../components/FacebookLogin.vue';
 
 @Component({
   components: {
     GoogleLoginComponent,
-    FacebookLoginComponent
+    // FacebookLoginComponent
   }
 })
 export default class Sprint1Page extends Vue {
