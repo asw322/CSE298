@@ -1,6 +1,7 @@
 <template>
     <div>
-        <button @click="login">Sign In with Google</button>
+        <!-- <button @click="login">Sign In with Google</button> -->
+        <a href="/api/google_api/google">Sign In with Google</a>
         <!-- <a href="/api/google_api/google">Sign In with Google</a> -->
         <!-- <p1>Variable: {{test}}</p1> -->
         <!-- <googleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></googleLogin> -->

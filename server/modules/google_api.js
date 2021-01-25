@@ -61,12 +61,13 @@ router.get('/google',
 
 router.get('/google/callback', passport.authenticate('google'),
   function(req, res) {
-    // Call your backend
+    
 
     console.log("in google callback");
-    console.log(req);
-    console.log(res);
-    // res.redirect('/good');
+    // console.log(req);
+    // console.log(res);
+
+    res.redirect('/');
   }
 );
 
@@ -81,10 +82,3 @@ router.get('/logout', (req, res) => {
 
 
 module.exports = router;
-
-
-/**
- * http://localhost:8080
- * /api/google_api/google/callback
- * ?code=4%2F0AY0e-g4DXcVyaCib2T63mDqUa5N79ZAI6uTZTs2OSBkzVycU9wxdWQcig25L2-dlKO0Oaw&scope=email%20profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20openid&authuser=1&prompt=consent
- */

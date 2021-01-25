@@ -31,7 +31,9 @@ const port = process.env.PORT || 8080;
 
 /* Application Settings*/
 app.use(cors());
-app.use(vueHistory());                              // Re-route all unknown pages to 'index.html' for client-side routing
+
+// Takes you to the default page when an invalid page is requested
+// app.use(vueHistory());                              // Re-route all unknown pages to 'index.html' for client-side routing
 app.use(express.json());                            // Allow the backend to recognize an incoming Request Object as a JSON object
 app.use(express.urlencoded({ extended: true }));    // Allow the backend to parse incoming Request Objects with urlencoded payloads with nesting enabled
 // app.use(cookieParser());
@@ -53,7 +55,7 @@ app.use(function (err, req, res, next) {
   message = err.message || 'Internal Server Error'
 
   console.error('[error] ' + err.stack)
-  res.status(code).json({ status: status })
+  res.status(status).json({ status: err })
 
 })
 

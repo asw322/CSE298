@@ -1,25 +1,31 @@
-// added to google_api.js for testing 
-// need to seperate later
-
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const db = require('../datastore/datastore.js');
 
 // called after callback function handler executes
 // makes the cookie smaller 
 passport.serializeUser(function(user, done) {
-    // done(null, user.id);
-    done(null, user);
+    done(null, user.id);
+    // done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
-    // Might have to change this
+passport.deserializeUser(function(gid, done) {
     // do the same thing as in callback function handler 
 
+    console.log("gid = " + gid);
 
-    // User.findById(id, function(err, user) {
-    //     done(err, user);
-    // });
-    done(null, user);
+    const sql = "SELECT * FROM users WHERE gid = $1";
+
+    const data = db
+        .query(sql, [gid])
+        .then(db_res => {
+            console.log(db_res.rows);
+            done(null, data);
+        })
+        .catch(err => {
+            console.log(err.stack);
+            done(err, null);
+        })
 });
 
 
