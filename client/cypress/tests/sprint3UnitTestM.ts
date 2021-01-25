@@ -6,13 +6,6 @@ describe('Index Page', () => {
 })
 
 //Manasi
-describe('personalized post', () => {
-    it('Should have the option for multiple tags to be added per post', () => {
-        cy.get('div')
-            .should('post-tags.vue', 'posts.vue','tagsComponent');
-    });
-});
-
 
 describe('Create Post', () => {
     // Make sure that all of the important elements are displaying correctly:
