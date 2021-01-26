@@ -28,25 +28,23 @@ router.use(cookieSession({
   keys: ['key1', 'key2']
 }));
 
-const isLoggedIn = (req, res, next) => {
-  if(req.user) {
-    console.log("user is logged in already");
-    next();
-  } else {
-    res.sendStatus(401);
-  }
-}
-
 router.use(passport.initialize());
 router.use(passport.session());
-
-
 
 const db = require('../datastore/datastore.js');
 var moment = require('moment');
 const { getIterator } = require('core-js');
 
 console.log("Hello world from google api");
+
+
+var userObj = {
+  uid: '',
+  username: '',
+  tid: '',
+  dob: '',
+  gid: ''
+}
 
 
 router.get('/google',
@@ -62,21 +60,39 @@ router.get('/google',
 router.get('/google/callback', passport.authenticate('google'),
   function(req, res) {
     console.log("in google callback");
-    // console.log(req);
-    // console.log(res);
+
+    // store the response in userObj
+    userObj = {
+      uid: req.user.uid,
+      username: req.user.username,
+      tid: req.user.tid,
+      dob: req.user.dob,
+      gid: req.user.gid
+    }
 
     res.redirect('/');
   }
 );
 
-router.get('api/google_api/good', isLoggedIn, (req, res) => res.send(`Welcome to our project`));
-
-
 router.get('/logout', (req, res) => {
   req.session = null;
   req.logout();
   res.redirect('/');
-})
+});
+
+router.get('/getGoogleInfo', function (req, res) {
+  // Check if the userObj is the default object 
+  // If so, return something different 
+
+  if(userObj.uid != '') {
+    console.log("")
+    res.status(200).send(userObj);
+  } else {
+    console.log("[Google/GetInfo] Empty object sent on no login")
+    res.status(400).send(userObj);
+  }
+  
+});
 
 
 module.exports = router;

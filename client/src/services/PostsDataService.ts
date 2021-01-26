@@ -10,7 +10,7 @@ class PostsDataService {
   }
 
   create(data: any) {
-    console.log("DATA SERVICE CREATE FUNCTION ");
+    // console.log("DATA SERVICE CREATE FUNCTION ");
     return https.post('/post_api/posts/', data);
   }
 

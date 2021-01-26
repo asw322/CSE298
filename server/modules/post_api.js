@@ -65,8 +65,9 @@ router.get('/posts', function (req, res) {
 router.post('/posts', async function (req, res) {
     var connectionSuccess = true;
     console.log("BACKEND POST FUNCTION");
-    console.log(req);
+    // console.log(req);
 
+    // Query for the highest pid 
     var pid_query = "SELECT pid as maximum FROM post ORDER BY pid DESC LIMIT 1 ";
 
     var inc = 0;
@@ -82,14 +83,19 @@ router.post('/posts', async function (req, res) {
             console.log("No Yeah No")
         })
     
-    var sql ="INSERT INTO post (pid, uid, tag, message, upvote, downvote) VALUES ($1, $2, $3, $4, $5, $6)";
+    var sql ="INSERT INTO post (pid, uid, message, upvote, downvote) VALUES ($1, $2, $3, $4, $5)";
     var text = req.body.text;
+    var uid = req.body.uid;
+    
+    // console.log("whole object = " + req.body);
+    // console.log("text retrieved = " + req.body.text);
+    // console.log("uid retrieved = " + req.body.uid);
+    // console.log("my uid = " + uid);
 
     var data = db
         .query(sql, [
             (inc + 1),
-            'U1',
-            'funny',
+            uid,
             text,
             0,
             0

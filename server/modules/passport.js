@@ -18,10 +18,15 @@ passport.deserializeUser(function(gid, done) {
 
     const data = db
         .query(sql, [gid])
+
+        // found user's account from psql
         .then(db_res => {
-            console.log(db_res.rows);
+            // console.log("user data = " + db_res.rows.toString);
+            console.log(db_res.rows[0]);
             done(null, data);
         })
+
+        // did not find user's account from psql (we need to create a new account for the user)
         .catch(err => {
             console.log(err.stack);
             done(err, null);

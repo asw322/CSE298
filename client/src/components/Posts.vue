@@ -59,7 +59,8 @@ import PostsDataService from '../services/PostsDataService';
 import Tags from './Tags.vue';
 
 interface Post {
-  id?: number,
+  uid: string,
+  id?: number,  //post id
   text: string,
   date?: string
 };
@@ -80,6 +81,7 @@ export default class Posts extends Vue {
   private inputValue = '';
   private dynamicTags= ['Tag 1', 'Tag 2', 'Tag 3'];
   private inputVisible= false;
+  private selecteduserid = 'U2';
   
 
   private formInput: string = '';
@@ -95,6 +97,7 @@ export default class Posts extends Vue {
 
         for (let obj of response.data) {
             let myObj = {
+                uid: this.selecteduserid,
                 id: obj.pid,    // id = id of the post
                 text: obj.message,
                 date: '',
@@ -102,13 +105,13 @@ export default class Posts extends Vue {
             }
 
             // Get all the tags that belong to obj.pid
-            PostsDataService.getAllTagsWithPid(obj.pid)
-              .then(response => {
+            // PostsDataService.getAllTagsWithPid(obj.pid)
+            //   .then(response => {
 
-              })
-              .catch(err => {
-                console.error(err.message);
-              })
+            //   })
+            //   .catch(err => {
+            //     console.error(err.message);
+            //   })
 
             this.posts.push(myObj);
         }
@@ -124,6 +127,7 @@ export default class Posts extends Vue {
   public addPost(): void {
     console.log("ADD POST FROM POSTS");
     const newPost: Post = {
+      uid: this.selecteduserid,
       text: this.formInput
     }
 
@@ -151,14 +155,14 @@ export default class Posts extends Vue {
   //TAG RELATED STUFF
   public handleClose(id: number, tag: string) {
     //This still connects to the database
-    PostsDataService.closeTag(id, tag)
-      .then(response => {
-        // On success, remove that tag from the tags
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);    
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
+    // PostsDataService.closeTag(id, tag)
+    //   .then(response => {
+    //     // On success, remove that tag from the tags
+    //     this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);    
+    //   })
+    //   .catch(err => {
+    //     console.error(err.message);
+    //   });
   }
 
   public showInput() {

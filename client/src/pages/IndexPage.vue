@@ -18,6 +18,9 @@
       <router-link class="list-group-item list-group-item-action" to="/sprint3">Sprint 3 [DONE]</router-link>
       
     </div>
+
+    <!-- <a v-if="loginUnsuccess"></a> -->
+
     <tags_list></tags_list>
     <tags></tags>
     <!-- <p1 v-bind:placeholder="hello()" required>Hello World</p1> -->
@@ -34,6 +37,15 @@ import Tags_list from '../components/Tags_list.vue';
 import Weather from '../components/Weather.vue';
 import Posts from '../components/Posts.vue';
 import simple from '../components/simple.vue';
+import GoogleDataService from '../services/GoogleDataService';
+
+interface User {
+  uid: string,
+  username: string, 
+  tid: string,
+  dob: string,
+  gid: string
+}
 
 @Component({
   components: {
@@ -45,6 +57,32 @@ import simple from '../components/simple.vue';
   }
 })
 export default class IndexPage extends Vue {
+  private myUser: User;
+  private loginUnsuccess: boolean = true;
+  
+  
+
+  // Life hook cycles 
+  public getUserInfo() {
+    GoogleDataService.getUserInfo()
+      .then(response => {
+        console.log("from the front end ");
+        console.log(response);
+        
+        // this.myUser = {
+        //   uid: response.uid,
+        //   username: response.username,
+        //   tid: response.tid,
+        //   dob: response.dob,
+        //   gid: response.gid
+        // }
+
+        this.loginUnsuccess = false;
+      })
+      .catch(err => {
+        console.error(err.message);
+      })
+  }
 }
 </script>
 
