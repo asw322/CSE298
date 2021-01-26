@@ -61,8 +61,6 @@ router.get('/google',
 
 router.get('/google/callback', passport.authenticate('google'),
   function(req, res) {
-    
-
     console.log("in google callback");
     // console.log(req);
     // console.log(res);

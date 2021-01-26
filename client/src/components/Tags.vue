@@ -21,7 +21,7 @@
       {{tag.name}}
     </el-tag> -->
 
-    <!-- <el-tag
+    <el-tag
   :key="tag"
   v-for="tag in dynamicTags"
   closable
@@ -40,7 +40,7 @@
   @blur="handleInputConfirm"
 >
 </el-input>
-<el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button> -->
+<el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
 
 
   </div>
@@ -108,29 +108,29 @@ export default class Tags extends Vue {
   }
 
 
-  // 
-  // public handleClose(tag) {
-  //   this.getAllTags();
-  //   // PUT REQUEST DB
-  //   // DELETE THE USE COOKIES FOR THAT TAGS
-  //   this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-  // }
-  // public showInput() {
-  //   this.inputVisible = true;
-  //   this.$nextTick(() => {
-  //     this.$refs.saveTagInput.$refs.input.focus();
-  //   });
-  // }
+  
+  public handleClose(tag) {
+    this.getAllTags();
+    // PUT REQUEST DB
+    // DELETE THE USE COOKIES FOR THAT TAGS
+    this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+  }
+  public showInput() {
+    this.inputVisible = true;
+    this.$nextTick(() => {
+      this.$refs.saveTagInput.$refs.input.focus();
+    });
+  }
 
   // Handles adding a new tag
-  // public handleInputConfirm() {
-  //   let inputValue = this.inputValue;
-  //   if(inputValue) {
-  //     this.dynamicTags.push(inputValue);
-  //   }
-  //   this.inputVisible = false;
-  //   this.inputValue = '';
-  // }
+  public handleInputConfirm() {
+    let inputValue = this.inputValue;
+    if(inputValue) {
+      this.dynamicTags.push(inputValue);
+    }
+    this.inputVisible = false;
+    this.inputValue = '';
+  }
 
 
   // METHODS FOR TAGSDATASERVICE

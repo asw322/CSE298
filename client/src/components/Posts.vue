@@ -7,7 +7,37 @@
     </div>
     <div>
       <div v-for="(post, index) in posts" :key="index">
-        <div class="card my-5 animate__animated animate__fadeInDown" >
+        
+
+
+
+        <el-tag
+          :key="tag"
+          v-for="tag in dynamicTags"
+          closable
+          :disable-transitions="false"
+          @close="handleClose(tag)">
+          
+          {{tag}}
+        </el-tag>
+        <el-input
+          class="input-new-tag"
+          v-if="inputVisible"
+          v-model="inputValue"
+          ref="saveTagInput"
+          size="mini"
+          @keyup.enter.native="handleInputConfirm"
+          @blur="handleInputConfirm"
+        >
+        </el-input>
+        <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+
+
+
+
+
+
+        <div class="card my-5 animate__animated animate__fadeInDown">
           <div class="card-header">
             {{post.date}}
           </div>
@@ -26,6 +56,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import PostsDataService from '../services/PostsDataService';
+import Tags from './Tags.vue';
 
 interface Post {
   id?: number,
@@ -33,13 +64,29 @@ interface Post {
   date?: string
 };
 
-@Component
+interface Tag {
+  pid: string, 
+  tag: string
+}
+
+@Component({
+  components: {
+    Tags
+  }
+})
 export default class Posts extends Vue {
   private posts: Post[] = [];
+  private tags: Tag[] = [];
+  private inputValue = '';
+  private dynamicTags= ['Tag 1', 'Tag 2', 'Tag 3'];
+  private inputVisible= false;
+  
+
   private formInput: string = '';
   private formError: string = '';
 
   created() {
+    // Get all the posts
     PostsDataService.getAll()
       .then(response => {
         console.log("[Get Post]")
@@ -50,8 +97,18 @@ export default class Posts extends Vue {
             let myObj = {
                 id: obj.pid,    // id = id of the post
                 text: obj.message,
-                date: ''
+                date: '',
+                tag: obj.tag
             }
+
+            // Get all the tags that belong to obj.pid
+            PostsDataService.getAllTagsWithPid(obj.pid)
+              .then(response => {
+
+              })
+              .catch(err => {
+                console.error(err.message);
+              })
 
             this.posts.push(myObj);
         }
@@ -90,6 +147,35 @@ export default class Posts extends Vue {
         console.error(err.response);
       })
   }
+  
+  //TAG RELATED STUFF
+  public handleClose(id: number, tag: string) {
+    //This still connects to the database
+    PostsDataService.closeTag(id, tag)
+      .then(response => {
+        // On success, remove that tag from the tags
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);    
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  }
+
+  public showInput() {
+    this.inputVisible = true;
+    this.$nextTick(() => {
+      this.$refs.saveTagInput.$refs.input.focus();
+    });
+  }
+
+  public handleInputConfirm() {
+    let inputValue = this.inputValue;
+    if(inputValue) {
+      this.dynamicTags.push(inputValue);
+    }
+  }
+
+
 
 }
 </script>
