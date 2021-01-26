@@ -16,13 +16,45 @@
       <router-link class="list-group-item list-group-item-action" to="/sprint1">Sprint 1 [DONE]</router-link>
       <router-link class="list-group-item list-group-item-action" to="/sprint2">Sprint 2 [DONE]</router-link>
       <router-link class="list-group-item list-group-item-action" to="/sprint3">Sprint 3 [DONE]</router-link>
+      
     </div>
+    <tags_list></tags_list>
+    <tags></tags>
+    <!-- <p1 v-bind:placeholder="hello()" required>Hello World</p1> -->
+    <h3>Messages Page</h3>
+    <simple> </simple>
+    <posts></posts>
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
+import Tags from '../components/Tags.vue';
+import Tags_list from '../components/Tags_list.vue';
+import Weather from '../components/Weather.vue';
+import Posts from '../components/Posts.vue';
+import simple from '../components/simple.vue';
 
-@Component
-export default class IndexPage extends Vue {}
+@Component({
+  components: {
+    Tags,
+    Tags_list,
+    Weather,
+    Posts,
+    simple
+  }
+})
+export default class IndexPage extends Vue {
+}
 </script>
+
+<style scoped>
+  .about-logo a {
+    padding: 20px;
+    outline: 1px solid rgb(169, 169, 169);
+    display: inline-block;
+  }
+  .about-logo a:hover {
+    opacity: 0.8;
+  }
+</style>
