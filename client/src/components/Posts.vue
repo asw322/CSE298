@@ -82,7 +82,6 @@ export default class Posts extends Vue {
   private dynamicTags= ['Tag 1', 'Tag 2', 'Tag 3'];
   private inputVisible= false;
   private selecteduserid = 'U2';
-  
 
   private formInput: string = '';
   private formError: string = '';

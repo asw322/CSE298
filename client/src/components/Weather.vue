@@ -39,6 +39,13 @@
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
     import { WeatherSingleton } from '../WeatherSingleton';
+    import LocationDataService from '../services/LocationDataService';
+
+    interface Location {
+      city: string, 
+      country: string
+    }
+    
     @Component({
         // Empty 
     })
@@ -49,6 +56,7 @@
       private weather = {};
       private city: string = "New York City";
       private state: string = "New York";
+      private uid: string = 'U1';
 
       created() {
         this.fetchWeather(this.$cookies.get("city_state_storage") || '');
@@ -64,11 +72,14 @@
                   // WeatherSingleton.setState(this.query.split(",")[0].trim());
                   // this.setResults(WeatherSingleton.getWeather());
 
+                  // send city and state to db if logged in 
+
                 this.$cookies.set("city_state_storage", this.city + ", " + this.state);
               }
               fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
               // fetch(WeatherSingleton.getURL())
                 .then(res => {
+                    this.addLocation();   // Location is valid, thus add to the backend for the user
                     return res.json();
                 }).then(this.setResults);
           }
@@ -85,6 +96,27 @@
               .split(' ')
               .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
               .join(' ');
+      } 
+
+      // copied from post
+      public addLocation(): void {
+        console.log("ADD LOCATION FROM USER SEARCH");
+
+        // Set up the location object 
+        const newLocation: Location = {
+          city: this.city,
+          country: this.state
+        }
+
+        // need to create a location data service
+        LocationDataService.update(this.uid, newLocation)
+          .then(response => {
+            
+            console.log("[Location added to DB]")
+          })
+          .catch(err => {
+            console.error(err.message);
+          })
       }
     }
 </script>
