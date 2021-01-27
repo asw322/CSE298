@@ -37,7 +37,7 @@
     </div>
 </template>
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
+    import { Component, Vue, Prop } from 'vue-property-decorator';
     import { WeatherSingleton } from '../WeatherSingleton';
     import LocationDataService from '../services/LocationDataService';
 
@@ -57,7 +57,7 @@
       private weather = {};
       private city: string = "New York City";
       private state: string = "New York";
-      private uid: string = 'U1';
+      @Prop(String) readonly uid: string;
 
       created() {
         this.fetchWeather(this.$cookies.get("city_state_storage") || '');
@@ -120,6 +120,11 @@
           .catch(err => {
             console.error(err.message);
           })
+      }
+
+      public updateFrontend(uid: string): void {
+        console.log("[Weather updateFrontend]");
+        this.uid = uid;
       }
     }
 </script>

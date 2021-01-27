@@ -4,6 +4,7 @@ const router = express.Router();
 const db = require('../datastore/datastore.js');
 var moment = require('moment');
 
+// Specific for uid
 router.get('/tags/:id', function (req, res) {
     var connectionSuccess = true;
     
@@ -22,6 +23,7 @@ router.get('/tags/:id', function (req, res) {
     console.log("grabbed something from tags_api");
 });
 
+// Overall function
 router.get('/tags', function (req, res)  {
     var connectionSuccess = true;
 

@@ -22,8 +22,8 @@ class TagsDataService {
     }
 
     // 1. Get all tags that the user has subscribed to 
-    getAllByUID(id: string) {
-        return https.get(`/tags_api/tags/${id}`);
+    getAllByUID(uid: string) {
+        return https.get(`/tags_api/tags/${uid}`);
     }
     
     // 2. Add a new tag for the user

@@ -21,25 +21,27 @@
 
     <!-- <a v-if="loginUnsuccess"></a> -->
     <!-- Alternative method for now -->
-    <button @click="getUserInfo">Retrieve information</button>
+    <!-- <button @click="getUserInfo">Retrieve information</button> -->
 
-    <tags_list></tags_list>
+    <tags_list :uid="myUser.uid" :list="unprocessed_list"></tags_list>
     <tags></tags>
     <!-- <p1 v-bind:placeholder="hello()" required>Hello World</p1> -->
     <h3>Messages Page</h3>
     <simple> </simple>
     <posts></posts>
+    <weather :uid="myUser.uid"></weather>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {Component, Vue, Prop} from 'vue-property-decorator';
 import Tags from '../components/Tags.vue';
 import Tags_list from '../components/Tags_list.vue';
 import Weather from '../components/Weather.vue';
 import Posts from '../components/Posts.vue';
 import simple from '../components/simple.vue';
 import GoogleDataService from '../services/GoogleDataService';
+import TagsDataService from '../services/TagsDataService';
 
 interface User {
   uid: string,
@@ -59,10 +61,21 @@ interface User {
   }
 })
 export default class IndexPage extends Vue {
-  private myUser: User;
+  public myUser: User = {
+    uid: '',
+    username: '', 
+    tid: '',
+    dob: '',
+    gid: ''
+  };
+
   private loginUnsuccess: boolean = true;
+  private unprocessed_list = [ ];
   
   
+  created() {
+    this.getUserInfo();
+  }
 
   // Life hook cycles 
   public getUserInfo() {
@@ -71,11 +84,40 @@ export default class IndexPage extends Vue {
         console.log("from the front end ");
         console.log(response.data);
 
+        // Saved the user information into local storage 
+        this.myUser = {
+          uid: response.data.uid,
+          username: response.data.username,
+          tid: response.data.tid,
+          dob: response.data.dob,
+          gid: response.data.gid
+        }
+
         this.loginUnsuccess = false;
+
+        TagsDataService.getAllByUID(this.myUser.uid)
+            .then(response => {
+                console.log("[Tags Retreival]");
+                console.log(response.data);
+                
+                for (let obj of response.data) {
+                    let myObj = {
+                        name: obj.tag,
+                        desc: ''
+                    }
+                    this.unprocessed_list.push(myObj);
+                }
+            })
+            .catch(err => {
+                console.error(`Couldn't fetch all posts: ${err}`)
+        });
       })
       .catch(err => {
         console.error(err.message);
       })
+    
+
+    
   }
 }
 </script>
