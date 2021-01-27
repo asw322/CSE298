@@ -9,6 +9,7 @@ passport.serializeUser(function(user, done) {
     // done(null, user);
 });
 
+// Not sure what this function does. It doesn't seem to send the data back to the front end
 passport.deserializeUser(function(gid, done) {
     // do the same thing as in callback function handler 
 

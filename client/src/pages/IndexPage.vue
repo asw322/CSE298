@@ -20,6 +20,8 @@
     </div>
 
     <!-- <a v-if="loginUnsuccess"></a> -->
+    <!-- Alternative method for now -->
+    <button @click="getUserInfo">Retrieve information</button>
 
     <tags_list></tags_list>
     <tags></tags>
@@ -67,15 +69,7 @@ export default class IndexPage extends Vue {
     GoogleDataService.getUserInfo()
       .then(response => {
         console.log("from the front end ");
-        console.log(response);
-        
-        // this.myUser = {
-        //   uid: response.uid,
-        //   username: response.username,
-        //   tid: response.tid,
-        //   dob: response.dob,
-        //   gid: response.gid
-        // }
+        console.log(response.data);
 
         this.loginUnsuccess = false;
       })

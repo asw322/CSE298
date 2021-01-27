@@ -61,14 +61,27 @@ router.get('/google/callback', passport.authenticate('google'),
   function(req, res) {
     console.log("in google callback");
 
+    var returnedObj = req.user;
+    const sql = "SELECT * FROM users WHERE gid = $1";
+
+    const data = db
+      .query(sql, [returnedObj.id])
+      .then(db_res => {
+        var userInfo = db_res.rows[0];
+        userObj = {
+          uid: userInfo.uid,
+          username: userInfo.username,
+          tid: userInfo.tid,
+          dob: userInfo.dob,
+          gid: userInfo.gid
+        }
+      })
+      .catch(err => {
+        console.error(err.message);
+      })
+
     // store the response in userObj
-    userObj = {
-      uid: req.user.uid,
-      username: req.user.username,
-      tid: req.user.tid,
-      dob: req.user.dob,
-      gid: req.user.gid
-    }
+    
 
     res.redirect('/');
   }
@@ -82,13 +95,16 @@ router.get('/logout', (req, res) => {
 
 router.get('/getGoogleInfo', function (req, res) {
   // Check if the userObj is the default object 
-  // If so, return something different 
+  // If so, return default object
 
   if(userObj.uid != '') {
-    console.log("")
+    console.log("Sending google login data to front end");
+
+    // console.log(userObj);
     res.status(200).send(userObj);
   } else {
-    console.log("[Google/GetInfo] Empty object sent on no login")
+    console.log("[Google/GetInfo] Empty object sent on no login");
+    // we may choose to send something else in the future
     res.status(400).send(userObj);
   }
   
