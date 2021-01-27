@@ -6,8 +6,8 @@ class LocationDataService {
     return https.get(`/location_api/location/${id}`);
   }
 
-  update(id: string, data: any) {
-    return https.put(`/location_api/location/${id}`, data);
+  update(data: any) {
+    return https.put(`/location_api/location/putlocation`, data);
   }
 
   delete(id: number) {

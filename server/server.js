@@ -7,6 +7,7 @@ const post_apiRoutes = require('./modules/post_api.js');
 const tags_apiRoutes = require('./modules/tags_api.js');
 const user_apiRoutes = require('./modules/user_api.js');
 const google_apiRoutes = require('./modules/google_api.js');
+const location_apiRoutes = require('./modules/location_api.js');
 
 // const passport = require('passport');
 
@@ -49,6 +50,7 @@ app.use('/api/post_api', post_apiRoutes);
 app.use('/api/tags_api', tags_apiRoutes);
 app.use('/api/user_api', user_apiRoutes);
 app.use('/api/google_api', google_apiRoutes);
+app.use('/api/location_api', location_apiRoutes);
 
 app.use(function (err, req, res, next) {
   status = err.status || 500

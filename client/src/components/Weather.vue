@@ -42,6 +42,7 @@
     import LocationDataService from '../services/LocationDataService';
 
     interface Location {
+      uid: string, 
       city: string, 
       country: string
     }
@@ -79,6 +80,7 @@
               fetch(`${this.url_base}weather?q=${this.state},${this.city}&units=imperial&APPID=${this.api_key}`)
               // fetch(WeatherSingleton.getURL())
                 .then(res => {
+                    console.log("front end weather api fetch success");
                     this.addLocation();   // Location is valid, thus add to the backend for the user
                     return res.json();
                 }).then(this.setResults);
@@ -104,12 +106,13 @@
 
         // Set up the location object 
         const newLocation: Location = {
+          uid: this.uid,
           city: this.city,
           country: this.state
         }
 
         // need to create a location data service
-        LocationDataService.update(this.uid, newLocation)
+        LocationDataService.update(newLocation)
           .then(response => {
             
             console.log("[Location added to DB]")

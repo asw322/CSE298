@@ -26,7 +26,8 @@ router.get('/location/:id', function (req, res) {
     console.log("grabbed something from location_api");
 });
 
-router.put('/location/:id', async function (req, res) {
+router.put('/location/putlocation', async function (req, res) {
+    console.log("location api update function");
     var connectionSuccess = true;
 
     var sql ="UPDATE users SET city = $1, country = $2 WHERE uid = $3";
@@ -35,7 +36,7 @@ router.put('/location/:id', async function (req, res) {
         .query(sql, [
             req.body.city,
             req.body.country,
-            req.params.id
+            req.body.uid
         ])
         .then(db_res => {
             console.log(db_res.rows)
