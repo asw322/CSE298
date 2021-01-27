@@ -7,9 +7,6 @@
     </div>
     <div>
       <div v-for="(post, index) in posts" :key="index">
-        
-
-
 
         <el-tag
           :key="tag"
@@ -31,11 +28,6 @@
         >
         </el-input>
         <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
-
-
-
-
-
 
         <div class="card my-5 animate__animated animate__fadeInDown">
           <div class="card-header">
@@ -82,7 +74,6 @@ export default class Posts extends Vue {
   private dynamicTags= ['Tag 1', 'Tag 2', 'Tag 3'];
   private inputVisible= false;
   private selecteduserid = 'U2';
-  
 
   private formInput: string = '';
   private formError: string = '';
